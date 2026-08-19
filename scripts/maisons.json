@@ -1,0 +1,60 @@
+[
+  {
+    "id": "ulk-001",
+    "titre_fr": "Studio meublé à 5 min de l'ULK",
+    "titre_en": "Furnished studio 5 mins from ULK",
+    "quartier": "Gisozi",
+    "prec_en": "no far from rubis station",
+    "prec_fr": "non loin de la station rubis",
+    "prix_rwf": 150000,
+    "prix_usd": 115,
+    "type_fr": "Studio",
+    "type_en": "Studio",
+    "meuble": true,
+    "salle_de_bain_fr": "Intérieure",
+    "salle_de_bain_en": "Inside",
+    "cuisine_fr": "Outside",
+    "cuisine_en": "Outside",
+    "proximite_ulk_fr": "5 minutes à pied",
+    "proximite_ulk_en": "5 minutes walk",
+    "photos": [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800"
+    ],
+    "description_fr": "Studio très propre avec lit, table d'étude, Wi-Fi rapide et eau chaude.",
+    "description_en": "Very clean studio with bed, study desk, fast Wi-Fi, and hot water.",
+    "equipements_fr": ["Wi-Fi", "Eau chaude", "Sécurité"],
+    "equipements_en": ["Wi-Fi", "Hot water", "Security"],
+    "disponible": true
+  },
+  {
+    "id": "ulk-001",
+    "titre_fr": "Studio meublé à 5 min de l'ULK",
+    "titre_en": "Furnished studio 5 mins from ULK",
+    "quartier": "Gisozi",
+    "prec_en": "no far from from ulk gate 2",
+    "prec_fr": "non loin du portail2 de l'ulk",
+    "prix_rwf": 150000,
+    "prix_usd": 115,
+    "type_fr": "Studio",
+    "type_en": "Studio",
+    "meuble": true,
+    "salle_de_bain_fr": "Intérieure",
+    "salle_de_bain_en": "Inside",
+    "cuisine_fr": "extérieur",
+    "cuisine_en": "Outside",
+    "proximite_ulk_fr": "5 minutes à pied",
+    "proximite_ulk_en": "5 minutes walk",
+    "photos": [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800"
+    ],
+    "description_fr": "Studio très propre avec lit, table d'étude, Wi-Fi rapide et eau chaude.",
+    "description_en": "Very clean studio with bed, study desk, fast Wi-Fi, and hot water.",
+    "equipements_fr": ["Wi-Fi", "Eau chaude", "Sécurité"],
+    "equipements_en": ["Wi-Fi", "Hot water", "Security"],
+    "disponible": true
+  }
+]

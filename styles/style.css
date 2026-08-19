@@ -1,0 +1,9 @@
+/* Fondu fluide pour le changement d'image */
+.img-fade {
+    transition: opacity 0.8s ease-in-out;
+    opacity: 1;
+}
+
+.img-fade-out {
+    opacity: 0;
+}
