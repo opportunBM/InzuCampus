@@ -1,4 +1,4 @@
-const MON_NUMERO_WHATSAPP = "0995840288"; 
+const MON_NUMERO_WHATSAPP = "+243995840288"; 
 
 //termes utilises pour differentes langues
 const uiTranslations = {
