@@ -1,4 +1,4 @@
-/* Fondu fluide pour le changement d'image */
+/*fluidite dans le changement d'image principale sur la carte de la maison*/
 .img-fade {
     transition: opacity 0.8s ease-in-out;
     opacity: 1;

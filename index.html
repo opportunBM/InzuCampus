@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InzuCampus - Student Housing ULK</title>
+    <title>InzuCampus - Student Housing</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -15,7 +15,11 @@
     <header class="bg-blue-700 text-white p-4 shadow-md sticky top-0 z-40">
         <div class="max-w-md mx-auto flex justify-between items-center">
             <div>
-                <h1 class="text-xl font-bold">InzuCampus 🇷🇼</h1>
+                <a href="#" class="logo">
+                    <img src="assets/images/inzu.jpeg" alt="Logo InzuCampus" style="height: 40px; border-radius: 10px; margin-right: 10px;"></a>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold">InzuCampus</h1>
                 <p id="header-subtitle" class="text-[10px] text-blue-200">Maisons & chambres proches de l'ULK</p>
             </div>
             
@@ -25,7 +29,7 @@
                     <option value="en">🇬🇧 EN</option>
                 </select>
 
-                <a id="general-whatsapp" href="#" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">
+                <a id="general-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="bg-green-500 hover:bg-green-600 text-white px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">
                     <i class="fab fa-whatsapp text-sm"></i> <span id="btn-contact-text">Contact</span>
                 </a>
             </div>
@@ -37,19 +41,19 @@
         <h3 id="section-title" class="text-base font-bold mb-4 text-gray-700 text-center">Offres disponibles près de l'ULK</h3>
         
         <div id="housing-list" class="space-y-6">
-            <!-- Injecté par JS -->
+            <!-- cette liste sera injectee par le js -->
         </div>
     </main>
 
     <!-- le modal pour la liste complete d'images -->
-    <div id="photo-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex flex-col justify-center items-center p-4">
+    <div id="photo-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex flex-col justify-center items-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="bg-white w-full max-w-md rounded-xl overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col">
             <div class="p-3 bg-gray-900 text-white flex justify-between items-center">
                 <span id="modal-title" class="text-xs font-bold truncate pr-2"></span>
-                <button id="close-modal" class="text-gray-400 hover:text-white text-xl font-bold px-2">&times;</button>
+                <button id="close-modal" type="button" aria-label="Fermer" class="text-gray-400 hover:text-white text-xl font-bold px-2">&times;</button>
             </div>
             <div id="modal-gallery" class="p-3 overflow-y-auto space-y-3 flex-grow">
-                <!-- Les images de la galerie seront injectées ici par js-->
+                <!-- Les images de la galerie seront aussi injectées ici par le js-->
             </div>
         </div>
     </div>
@@ -65,8 +69,8 @@
             </div>
             
             <div class="flex justify-center items-center gap-4 text-xs text-gray-300">
-                <span class="flex items-center gap-1"><i class="fas fa-check-circle text-green-400"></i> Visites virtuelles</span>
-                <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt text-red-400"></i> Gisozi, Kigali</span>
+                <span class="flex items-center gap-1"><i class="fas fa-check-circle text-green-400"></i> <span id="virtual-visits-label">Visites virtuelles</span></span>
+                <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt text-red-400"></i> <span id="location-label">Gisozi, Kigali</span></span>
             </div>
 
             <div class="border-t border-gray-800 pt-3 text-[11px] text-gray-500">
