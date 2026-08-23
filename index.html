@@ -60,6 +60,16 @@
         </div>
     </div>
 
+    <div id="photo-lightbox" class="photo-lightbox hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Visionneuse de photos">
+        <button id="close-lightbox" type="button" class="lightbox-control lightbox-close" aria-label="Fermer la photo">&times;</button>
+        <button id="previous-photo" type="button" class="lightbox-control lightbox-previous" aria-label="Photo précédente">&#10094;</button>
+        <figure id="lightbox-stage" class="lightbox-stage">
+            <img id="lightbox-image" src="" alt="">
+            <figcaption id="lightbox-counter" class="lightbox-counter"></figcaption>
+        </figure>
+        <button id="next-photo" type="button" class="lightbox-control lightbox-next" aria-label="Photo suivante">&#10095;</button>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-gray-900 text-white mt-8 py-6 px-4 border-t border-gray-800">
         <div class="max-w-md mx-auto text-center space-y-4">

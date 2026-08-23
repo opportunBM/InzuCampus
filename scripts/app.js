@@ -95,12 +95,19 @@ let maisonsData = [];
 let imageIntervals = [];
 let imageTimeouts = [];
 let lastFocusedElement = null;
+let lastGalleryTrigger = null;
+let lightboxPhotos = [];
+let lightboxIndex = 0;
+let touchStartX = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
     const langSelect = document.getElementById('language-select');
     const closeModalBtn = document.getElementById('close-modal');
     const modal = document.getElementById('photo-modal');
     const housingList = document.getElementById('housing-list');
+    const modalGallery = document.getElementById('modal-gallery');
+    const lightbox = document.getElementById('photo-lightbox');
+    const lightboxStage = document.getElementById('lightbox-stage');
 
     langSelect.addEventListener('change', (e) => {
         if (!uiTranslations[e.target.value]) return;
@@ -110,6 +117,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     closeModalBtn.addEventListener('click', closeGallery);
+    document.getElementById('close-lightbox').addEventListener('click', closeLightbox);
+    document.getElementById('previous-photo').addEventListener('click', () => changeLightboxPhoto(-1));
+    document.getElementById('next-photo').addEventListener('click', () => changeLightboxPhoto(1));
+
+    modalGallery.addEventListener('click', (e) => {
+        const photoButton = e.target.closest('[data-lightbox-index]');
+        if (!photoButton) return;
+        lastGalleryTrigger = photoButton;
+        openLightbox(Number(photoButton.dataset.lightboxIndex));
+    });
+
+    lightboxStage.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    lightboxStage.addEventListener('touchend', (e) => {
+        const swipeDistance = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(swipeDistance) < 40) return;
+        changeLightboxPhoto(swipeDistance < 0 ? 1 : -1);
+    }, { passive: true });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
 
     //si on clique a l'exterieur le modal se ferme
     modal.addEventListener('click', (e) => {
@@ -117,6 +147,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+            closeLightbox();
+            return;
+        }
+        if (e.key === 'ArrowLeft' && !lightbox.classList.contains('hidden')) changeLightboxPhoto(-1);
+        if (e.key === 'ArrowRight' && !lightbox.classList.contains('hidden')) changeLightboxPhoto(1);
+        if (e.key === 'Tab' && !lightbox.classList.contains('hidden')) {
+            trapModalFocus(e, lightbox);
+            return;
+        }
         if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeGallery();
         if (e.key === 'Tab' && !modal.classList.contains('hidden')) trapModalFocus(e, modal);
     });
@@ -319,8 +359,11 @@ function openGallery(maisonId) {
 
     lastFocusedElement = document.activeElement;
     modalTitle.innerText = getLocalizedValue(maison, 'titre');
-    modalGallery.innerHTML = photos.map(photo => `
-        <img src="${escapeHtml(safeImageUrl(photo))}" class="w-full h-56 object-cover rounded-lg shadow" alt="Photo logement">
+    lightboxPhotos = photos;
+    modalGallery.innerHTML = photos.map((photo, index) => `
+        <button type="button" data-lightbox-index="${index}" class="gallery-photo-button" aria-label="Voir la photo ${index + 1} en plein écran">
+            <img src="${escapeHtml(safeImageUrl(photo))}" class="w-full h-56 object-cover rounded-lg shadow" alt="Photo logement ${index + 1}">
+        </button>
     `).join('');
 
     modal.classList.remove('hidden');
@@ -328,7 +371,39 @@ function openGallery(maisonId) {
     document.getElementById('close-modal').focus();
 }
 
+function openLightbox(index) {
+    if (!lightboxPhotos.length || !Number.isInteger(index)) return;
+    lightboxIndex = Math.max(0, Math.min(index, lightboxPhotos.length - 1));
+    const lightbox = document.getElementById('photo-lightbox');
+    lightbox.classList.remove('hidden');
+    lightbox.setAttribute('aria-hidden', 'false');
+    updateLightboxPhoto();
+    document.getElementById('close-lightbox').focus();
+}
+
+function updateLightboxPhoto() {
+    const image = document.getElementById('lightbox-image');
+    const counter = document.getElementById('lightbox-counter');
+    image.src = safeImageUrl(lightboxPhotos[lightboxIndex]);
+    image.alt = `Photo ${lightboxIndex + 1} sur ${lightboxPhotos.length}`;
+    counter.innerText = `${lightboxIndex + 1} / ${lightboxPhotos.length}`;
+}
+
+function changeLightboxPhoto(direction) {
+    if (!lightboxPhotos.length) return;
+    lightboxIndex = (lightboxIndex + direction + lightboxPhotos.length) % lightboxPhotos.length;
+    updateLightboxPhoto();
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('photo-lightbox');
+    lightbox.classList.add('hidden');
+    lightbox.setAttribute('aria-hidden', 'true');
+    if (lastGalleryTrigger instanceof HTMLElement) lastGalleryTrigger.focus();
+}
+
 function closeGallery() {
+    closeLightbox();
     const modal = document.getElementById('photo-modal');
     modal.classList.add('hidden');
     modal.setAttribute('aria-hidden', 'true');
