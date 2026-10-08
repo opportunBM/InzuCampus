@@ -1,4 +1,4 @@
-/*fluidite dans le changement d'image principale sur la carte de la maison*/
+/*fluidite au changement*/
 .img-fade {
     transition: opacity 0.8s ease-in-out;
     opacity: 1;
